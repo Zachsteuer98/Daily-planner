@@ -5,8 +5,8 @@ var Today = (moment().format("MMMM D, YYYY"))
 var hourAudit=function(){
     var currentHour= moment().hour() 
 
-    for(var i = 8; i < 19; i++); {
-        var taskArea = $("#task-content-" + i)
+    for(var i = 8; i < 17; i++); {
+        var taskArea = $("#task-" + i)
         if(currentHour>i){
             $(taskArea).addClass("past");
         } else if (currentHour === i){
