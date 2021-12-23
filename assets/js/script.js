@@ -1,5 +1,21 @@
-var Today = (moment().format("MMMM D, YYYY"))
-    $("#currentDay").text(Today);
+tasks = [];
+
+// load tasks
+var loadTasks = function() {
+    tasks = JSON.parse(localStorage.getItem("tasks"))
+    if (!tasks) {
+        tasks = {};
+    };
+    printTasks(tasks)
+}
+
+var printTasks = function() {
+    $.each(tasks), function(list, arr) {
+        var taskP = $("<p>").addClass("description task-content-" + list).text(arr)
+
+        $("task-content-" + list).replaceWith(taskP);
+    }
+}
 
 //color code hours Credit too mlportu git https://github.com/mlportu/workday-scheduler/blob/master/assets/script.js
 var hourAudit=function(){
@@ -17,7 +33,3 @@ var hourAudit=function(){
     } 
 }
 
-setInterval(function(){
-    hourAudit();},1000*60*60);
-
-    hourAudit()
