@@ -1,44 +1,48 @@
+var Today = (moment().format("MMMM D, YYYY"))
+    $("#currentDay").text(Today);
 tasks = [];
 
-// load tasks
-var loadTasks = function() {
+//load tasks
+var loadTasks = function(){
     tasks = JSON.parse(localStorage.getItem("tasks"))
-    if (!tasks) {
-        tasks = {};
-    };
+    if(!tasks) {
+        tasks={};
+    } ;
     printTasks(tasks)
 }
 
-var printTasks = function() {
-    $.each(tasks), function(list, arr) {
+var printTasks = function(){
+    $.each(tasks, function(list, arr){
+
         var taskP = $("<p>").addClass("description task-item-" + list).text(arr)
-console.log(list)
-console.log(taskP)
-        $("task-content-" + list).replaceWith(taskP);
-    }
-}
+        
+        // console.log(list)
+        // console.log(taskP);
 
-var Today = (moment().format("MMMM D, YYYY"))
-    $("#currentDay").text(Today);
+        $("#task-item-" + list).replaceWith(taskP);
+    })
+ }
 
-//color code hours Credit too mlportu git https://github.com/mlportu/workday-scheduler/blob/master/assets/script.js
-var hourAudit=function(){
-    var currentHour= moment().hour() 
+//color code hours source from https://github.com/mlportu/workday-scheduler
+var hourAudit =function(){
+    var currentHour = moment().hour() 
 
-    for(var i = 8; i < 17; i++); {
-        var taskArea = $("#task-" + i)
+    for(var i=8; i<18; i++){
+        var taskArea = $("#task-"+i)  
         if(currentHour>i){
             $(taskArea).addClass("past");
         } else if (currentHour === i){
             $(taskArea).addClass("present");
-        }else {
-            $(taskArea).addClass("future");
+        }else{
+            $(taskArea).addClass("future")
         }
-    } 
+    }
 }
 
-setInterval(function(){
-    hourAudit();},1000*60*60);
+//set timer to one hour increments
+  setInterval(function(){
+      hourAudit();},1000*60*60);
 
-loadTasks();
-hourAudit();
+//call loadTask function and hourAudit
+  loadTasks();
+  hourAudit();
