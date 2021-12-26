@@ -70,12 +70,9 @@ var hourAudit =function(){
     })
 })
 
-//Save task text using save button
+//Save tasks
 $(".saveBtn").on("click", function(){
-    var index = $(".saveBtn").index(this);
-    console.log(index)
-    index = $(this).parent().find("taskItem").outerText;
-    localStorage.setItem("tasks",JSON.stringify(tasks));
+      console.log("<save button> was clicked");
 })
 
 //set timer to one hour increments
