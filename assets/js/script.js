@@ -66,18 +66,15 @@ var hourAudit =function(){
 
         //replace old span with new span
         $(this).replaceWith(newText);
-        console.log(newText)
     })
 })
 
 //Save button is responsive on click and logs to the console
-    $(".saveBtn").on("click", function(){
-    console.log("<save button> was clicked");
+    $(".saveBtn").on("click", function(event){
     var index = $('saveBtn').index(this);
-    console.log(index)
-    //grab task by taskItem[i] need to create unique classes or ID's for each updated task box
-    var textSpan = $(".taskItem")
-
+    var textSpan = $("span.taskItem")
+    var idSpan = $("span.taskItem") 
+    localStorage.setItem(idSpan, JSON.stringify(textSpan))
 })
 
 
