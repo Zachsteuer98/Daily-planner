@@ -14,12 +14,12 @@ var loadTasks = function(){
 var printTasks = function(){
     $.each(tasks, function(list, arr){
 
-        var taskSpan = $("<span>").addClass("task-item-" + list).text(arr)
+        var taskSpan = $("<span>").addClass("task-" + list).text(arr)
         
         // console.log(list)
         // console.log(taskSpan);
 
-        $("#task-item-" + list).replaceWith(taskSpan);
+        $("#task-" + list).replaceWith(taskSpan);
     })
  }
 
@@ -70,14 +70,21 @@ var hourAudit =function(){
     })
 })
 
-//Save tasks
-$(".saveBtn").on("click", function(){
-      console.log("<save button> was clicked");
+//Save button is responsive on click and logs to the console
+    $(".saveBtn").on("click", function(){
+    console.log("<save button> was clicked");
+    var index = $('saveBtn').index(this);
+    console.log(index)
+    var textSpan = $(".taskItem")
+
 })
+
+
 
 //set timer to one hour increments
   setInterval(function(){
       hourAudit();},1000*60*60);
+
 
 //call loadTask function and hourAudit
   loadTasks();
