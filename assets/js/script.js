@@ -59,7 +59,7 @@ var hourAudit =function(){
         .val()
         .trim();
 
-        // recreate span element
+        // recreate span element (how do I make it so that each individual task has its own taskItem[i])
         var newText = $("<span>")
         .addClass("taskItem")
         .text(text);
@@ -75,6 +75,7 @@ var hourAudit =function(){
     console.log("<save button> was clicked");
     var index = $('saveBtn').index(this);
     console.log(index)
+    //grab task by taskItem[i] need to create unique classes or ID's for each updated task box
     var textSpan = $(".taskItem")
 
 })
