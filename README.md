@@ -13,7 +13,7 @@ moment.js
 fontawesome
 
 ## Website URL
- https://zachsteuer98.github.io/super-disco/
+ https://zachsteuer98.github.io/Daily-planner/
 
 ## Contributers
 Made by Zachary Steuer
