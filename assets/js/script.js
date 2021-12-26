@@ -70,7 +70,7 @@ var hourAudit =function(){
 })
 
 //Save button is responsive on click and logs to the console
-    $(".saveBtn").on("click", function(event){
+    $(".saveBtn").on("click", function(){
     var index = $('saveBtn').index(this);
     var textSpan = $("span.taskItem")
     var idSpan = $("span.taskItem") 
