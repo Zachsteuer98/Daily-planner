@@ -14,12 +14,12 @@ var loadTasks = function(){
 var printTasks = function(){
     $.each(tasks, function(list, arr){
 
-        var taskP = $("<p>").addClass("description task-item-" + list).text(arr)
+        var taskSpan = $("<span>").addClass("task-item-" + list).text(arr)
         
         // console.log(list)
-        // console.log(taskP);
+        // console.log(taskSpan);
 
-        $("#task-item-" + list).replaceWith(taskP);
+        $("#task-item-" + list).replaceWith(taskSpan);
     })
  }
 
@@ -38,6 +38,45 @@ var hourAudit =function(){
         }
     }
 }
+
+//clicking on taskBin opens the <span> and allows you to enter text source used from lesson 5.1.6
+    $(".taskBin").on("click", "span", function() {
+    var text = $(this).text()
+
+    var textInput = $("<textarea>")
+    .addClass("form-control")
+    .val(text);
+
+    $(this).replaceWith(textInput);
+
+    textInput.trigger("focus");
+
+//Task needs to be updated
+
+    $(".taskBin").on("blur", "textarea", function(){
+        // get the textarea's current value/text
+        var text = $(this)
+        .val()
+        .trim();
+
+        // recreate span element
+        var newText = $("<span>")
+        .addClass("taskItem")
+        .text(text);
+
+        //replace old span with new span
+        $(this).replaceWith(newText);
+        console.log(newText)
+    })
+})
+
+//Save task text using save button
+$(".saveBtn").on("click", function(){
+    var index = $(".saveBtn").index(this);
+    console.log(index)
+    index = $(this).parent().find("taskItem").outerText;
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+})
 
 //set timer to one hour increments
   setInterval(function(){
