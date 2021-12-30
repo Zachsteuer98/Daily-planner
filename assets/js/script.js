@@ -38,7 +38,11 @@ var hourAudit =function(){
         }
     }
 }
-
+for (var i = 8; i < 18; i++) {
+    var saveText = localStorage.getItem(i)
+    var textArea = $("#task-" + i).children()[0].text(saveText)
+    console.log(textArea)
+}
 //clicking on taskBin opens the <span> and allows you to enter text source used from lesson 5.1.6
     $(".taskBin").on("click", "span", function() {
     var text = $(this).text()
@@ -71,13 +75,11 @@ var hourAudit =function(){
 
 //Save button is responsive on click and logs to the console
     $(".saveBtn").on("click", function(){
-    var index = $('saveBtn').index(this);
-    var textSpan = $("span.taskItem")
-    var idSpan = $("span.taskItem") 
-    localStorage.setItem(idSpan, JSON.stringify(textSpan))
+    var textArea = $(this).siblings("#task-" + $(this).attr("id"))
+    var id = $(this).attr("id")
+    var saveText = textArea.children().text() 
+    localStorage.setItem(id, saveText)
 })
-
-
 
 //set timer to one hour increments
   setInterval(function(){
@@ -87,3 +89,6 @@ var hourAudit =function(){
 //call loadTask function and hourAudit
   loadTasks();
   hourAudit();
+
+
+  console.log(localStorage.getItem("toDo"))
