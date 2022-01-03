@@ -38,11 +38,7 @@ var hourAudit =function(){
         }
     }
 }
-for (var i = 8; i < 18; i++) {
-    var saveText = localStorage.getItem(i)
-    var textArea = $("#task-" + i).children()[0].text(saveText)
-    console.log(textArea)
-}
+
 //clicking on taskBin opens the <span> and allows you to enter text source used from lesson 5.1.6
     $(".taskBin").on("click", "span", function() {
     var text = $(this).text()
@@ -90,5 +86,10 @@ for (var i = 8; i < 18; i++) {
   loadTasks();
   hourAudit();
 
-
   console.log(localStorage.getItem("toDo"))
+  for (var i = 8; i < 18; i++) {
+    var saveText = localStorage.getItem(i)
+    var textArea = $("#task-" + i).children()[0].text(saveText)
+    console.log(textArea)
+}
+ 
