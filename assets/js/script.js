@@ -75,7 +75,15 @@ var hourAudit =function(){
     var id = $(this).attr("id")
     var saveText = textArea.children().text() 
     localStorage.setItem(id, saveText)
+    displayTasks()
 })
+
+var displayTasks = function(id, saveText) {
+for (var i = 8; i < 18; i++) 
+    console.log(localStorage.getItem(i))
+    
+    
+}
 
 //set timer to one hour increments
   setInterval(function(){
@@ -86,10 +94,11 @@ var hourAudit =function(){
   loadTasks();
   hourAudit();
 
-  console.log(localStorage.getItem("toDo"))
-  for (var i = 8; i < 18; i++) {
-    var saveText = localStorage.getItem(i)
-    var textArea = $("#task-" + i).children()[0].text(saveText)
-    console.log(textArea)
-}
+
+//   console.log(localStorage.getItem("toDo"))
+//   for (var i = 8; i < 18; i++) {
+//     var saveText = localStorage.getItem(i)
+//     var textArea = $("#task-" + i).children()[0].text(saveText)
+//     console.log(textArea)
+// }
  
