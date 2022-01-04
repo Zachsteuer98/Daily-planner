@@ -1,3 +1,6 @@
+var task = [];
+taskIdCounter= 8
+
 var Today = (moment().format("MMMM D, YYYY"))
     $("#currentDay").text(Today);
 tasks = [];
@@ -72,15 +75,31 @@ var hourAudit =function(){
 //Save button is responsive on click and logs to the console
     $(".saveBtn").on("click", function(){
     var textArea = $(this).siblings("#task-" + $(this).attr("id"))
-    var id = $(this).attr("id")
-    var saveText = textArea.children().text() 
-    localStorage.setItem(id, saveText)
-    displayTasks()
-})
+    var taskDataObj = {
+    time: $(this).attr("id"),
+    tasks: textArea.children().text(),
+    } 
+    console.log(taskDataObj)
+
+    // create new array to hold updated list of tasks
+  var updatedTaskArr = [];
+
+  // loop through current tasks
+  for (var i = 8; i < 18; i++) {
+    // if tasks[i].id doesn't match the value of taskId, let's keep that task and push it into the new array
+    
+      updatedTaskArr.push(tasks[i]);
+  }
+
+  // reassign tasks array to be the same as updatedTaskArr
+  tasks = updatedTaskArr;
+  
+localStorage.setItem("tasks", JSON.stringify(taskDataObj));
+    });
 
 var displayTasks = function(id, saveText) {
 for (var i = 8; i < 18; i++) 
-    console.log(localStorage.getItem(i))
+    localStorage.getItem(i)
     
     
 }
