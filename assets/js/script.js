@@ -1,4 +1,9 @@
 var task = [];
+if(JSON.parse(localStorage.getItem("tasks")).length > 0 
+) {
+    task = JSON.parse(localStorage.getItem("tasks"))
+}
+console.log(task)
 taskIdCounter= 8
 
 var Today = (moment().format("MMMM D, YYYY"))
@@ -79,22 +84,33 @@ var hourAudit =function(){
     time: $(this).attr("id"),
     tasks: textArea.children().text(),
     } 
-    console.log(taskDataObj)
-
-    // create new array to hold updated list of tasks
-  var updatedTaskArr = [];
-
-  // loop through current tasks
-  for (var i = 8; i < 18; i++) {
-    // if tasks[i].id doesn't match the value of taskId, let's keep that task and push it into the new array
-    
-      updatedTaskArr.push(tasks[i]);
+    // console.log(taskDataObj)
+    // task.push(taskDataObj)
+    // console.log(task)
+  if(task.length <= 0) {
+      console.log(true)
+      task.push(taskDataObj)
   }
-
+  var updatedTaskArr = [];
+  var updatedTask = false
+//   loop through current tasks
+  for (var i = 0; i < task.length; i++) {
+    // if tasks[i].id doesn't match the value of taskId, let's keep that task and push it into the new array
+    if(task[i].time === $(this).attr("id")) {
+        task[i].tasks = textArea.children().text()
+        updatedTask = true
+        updatedTaskArr.push(task[i])
+    }   
+  }
+    if(updatedTask === false) {
+        console.log(true)
+        task.push(taskDataObj)
+    }
+console.log("this is old task array", task)
+console.log("this is the updated task array", updatedTaskArr)
   // reassign tasks array to be the same as updatedTaskArr
-  tasks = updatedTaskArr;
   
-localStorage.setItem("tasks", JSON.stringify(taskDataObj));
+localStorage.setItem("task", JSON.stringify(task));
     });
 
 var displayTasks = function(id, saveText) {
@@ -113,11 +129,4 @@ for (var i = 8; i < 18; i++)
   loadTasks();
   hourAudit();
 
-
-//   console.log(localStorage.getItem("toDo"))
-//   for (var i = 8; i < 18; i++) {
-//     var saveText = localStorage.getItem(i)
-//     var textArea = $("#task-" + i).children()[0].text(saveText)
-//     console.log(textArea)
-// }
  
