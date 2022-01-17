@@ -1,33 +1,33 @@
 var task = [];
-if(JSON.parse(localStorage.getItem("tasks")).length > 0 
+if(JSON.parse(localStorage.getItem("task")).length > 0 
 ) {
-    task = JSON.parse(localStorage.getItem("tasks"))
+    task = JSON.parse(localStorage.getItem("task"))
 }
 console.log(task)
 taskIdCounter= 8
 
 var Today = (moment().format("MMMM D, YYYY"))
     $("#currentDay").text(Today);
-tasks = [];
+// tasks = [];
 
 //load tasks
 var loadTasks = function(){
-    tasks = JSON.parse(localStorage.getItem("tasks"))
+    tasks = JSON.parse(localStorage.getItem("task"))
     if(!tasks) {
-        tasks={};
+        tasks=[];
     } ;
-    printTasks(tasks)
+    printTasks()
 }
 
 var printTasks = function(){
     $.each(tasks, function(list, arr){
-
-        var taskSpan = $("<span>").addClass("task-" + list).text(arr)
-        
+console.log(list)
+console.log(arr)
+        // var taskSpan = $("<span>").addClass("task-" + list).text(arr)
+        $('#p-' + arr.time).text(arr.tasks)
         // console.log(list)
         // console.log(taskSpan);
-
-        $("#task-" + list).replaceWith(taskSpan);
+        // $("#task-" + list).replaceWith(taskSpan);
     })
  }
 
@@ -84,11 +84,9 @@ var hourAudit =function(){
     time: $(this).attr("id"),
     tasks: textArea.children().text(),
     } 
-    // console.log(taskDataObj)
-    // task.push(taskDataObj)
-    // console.log(task)
+   
   if(task.length <= 0) {
-      console.log(true)
+    //   console.log(true)
       task.push(taskDataObj)
   }
   var updatedTaskArr = [];
@@ -103,11 +101,10 @@ var hourAudit =function(){
     }   
   }
     if(updatedTask === false) {
-        console.log(true)
         task.push(taskDataObj)
     }
-console.log("this is old task array", task)
-console.log("this is the updated task array", updatedTaskArr)
+// console.log("this is old task array", task)
+// console.log("this is the updated task array", updatedTaskArr)
   // reassign tasks array to be the same as updatedTaskArr
   
 localStorage.setItem("task", JSON.stringify(task));
