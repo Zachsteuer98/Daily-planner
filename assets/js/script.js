@@ -1,25 +1,33 @@
+var task = [];
+if(JSON.parse(localStorage.getItem("task")).length > 0 
+) {
+    task = JSON.parse(localStorage.getItem("task"))
+}
+console.log(task)
+taskIdCounter= 8
+
 var Today = (moment().format("MMMM D, YYYY"))
     $("#currentDay").text(Today);
-tasks = [];
+// tasks = [];
 
 //load tasks
 var loadTasks = function(){
-    tasks = JSON.parse(localStorage.getItem("tasks"))
+    tasks = JSON.parse(localStorage.getItem("task"))
     if(!tasks) {
-        tasks={};
+        tasks=[];
     } ;
-    printTasks(tasks)
+    printTasks()
 }
 
 var printTasks = function(){
     $.each(tasks, function(list, arr){
-
-        var taskSpan = $("<span>").addClass("task-" + list).text(arr)
-        
+console.log(list)
+console.log(arr)
+        // var taskSpan = $("<span>").addClass("task-" + list).text(arr)
+        $('#p-' + arr.time).text(arr.tasks)
         // console.log(list)
         // console.log(taskSpan);
-
-        $("#task-" + list).replaceWith(taskSpan);
+        // $("#task-" + list).replaceWith(taskSpan);
     })
  }
 
@@ -71,13 +79,43 @@ var hourAudit =function(){
 
 //Save button is responsive on click and logs to the console
     $(".saveBtn").on("click", function(){
-    var index = $('saveBtn').index(this);
-    var textSpan = $("span.taskItem")
-    var idSpan = $("span.taskItem") 
-    localStorage.setItem(idSpan, JSON.stringify(textSpan))
-})
+    var textArea = $(this).siblings("#task-" + $(this).attr("id"))
+    var taskDataObj = {
+    time: $(this).attr("id"),
+    tasks: textArea.children().text(),
+    } 
+   
+  if(task.length <= 0) {
+    //   console.log(true)
+      task.push(taskDataObj)
+  }
+  var updatedTaskArr = [];
+  var updatedTask = false
+//   loop through current tasks
+  for (var i = 0; i < task.length; i++) {
+    // if tasks[i].id doesn't match the value of taskId, let's keep that task and push it into the new array
+    if(task[i].time === $(this).attr("id")) {
+        task[i].tasks = textArea.children().text()
+        updatedTask = true
+        updatedTaskArr.push(task[i])
+    }   
+  }
+    if(updatedTask === false) {
+        task.push(taskDataObj)
+    }
+// console.log("this is old task array", task)
+// console.log("this is the updated task array", updatedTaskArr)
+  // reassign tasks array to be the same as updatedTaskArr
+  
+localStorage.setItem("task", JSON.stringify(task));
+    });
 
-
+var displayTasks = function(id, saveText) {
+for (var i = 8; i < 18; i++) 
+    localStorage.getItem(i)
+    
+    
+}
 
 //set timer to one hour increments
   setInterval(function(){
@@ -87,3 +125,5 @@ var hourAudit =function(){
 //call loadTask function and hourAudit
   loadTasks();
   hourAudit();
+
+ 
