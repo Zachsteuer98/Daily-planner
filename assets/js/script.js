@@ -1,5 +1,5 @@
 var task = [];
-if(JSON.parse(localStorage.getItem("task")).length > 0 
+if(JSON.parse(localStorage.getItem("task").length) > 0 
 ) {
     task = JSON.parse(localStorage.getItem("task"))
 }
