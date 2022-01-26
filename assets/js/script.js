@@ -1,6 +1,6 @@
 var task = [];
-if(JSON.parse(localStorage.getItem("task").length) > 0 
-) {
+if(localStorage.getItem("task")) { 
+
     task = JSON.parse(localStorage.getItem("task"))
 }
 console.log(task)
